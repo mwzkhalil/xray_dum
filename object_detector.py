@@ -3,7 +3,14 @@ from flask import request, Flask, jsonify
 from waitress import serve
 from PIL import Image
 
+from pyngrok import ngrok
+from flask_cors import CORS
+
+
 app = Flask(__name__)
+ngrok.set_auth_token("2AdBAXnWv0yZeCSB6jjLkvYYmyV_kUeim1L1oKdrc1p1XZNV")
+public_url=ngrok.connect(5000).public_url
+CORS(app)
 
 @app.route("/detect", methods=["POST"])
 def detect():
@@ -40,4 +47,6 @@ def detect_objects_on_image(buf):
     
     return output
 
-serve(app, host='0.0.0.0', port=8080)
+# serve(app, host='0.0.0.0', port=8080)
+print(public_url)
+app.run()
