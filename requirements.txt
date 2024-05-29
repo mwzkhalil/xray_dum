@@ -3,3 +3,5 @@ flask
 waitress
 pillow
 roboflow
+pyngrok
+flask_cors
